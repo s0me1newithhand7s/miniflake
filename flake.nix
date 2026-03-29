@@ -11,18 +11,16 @@
     nixpkgs,
     ...
   } @ inputs: {
-    nixosConfigurations = {
-      miniflake = nixpkgs.lib.nixosSystem {
+    nixosConfigurations ."default" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           (
             {
               fileSystems."/".device = "/dev/null";
-              boot.systemd-boot.enable = true;
+              boot.loader.systemd-boot.enable = true;
             }
           )
         ];
       };
     };
-  };
 }
